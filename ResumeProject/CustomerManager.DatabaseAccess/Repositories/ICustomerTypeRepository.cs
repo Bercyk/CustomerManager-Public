@@ -1,5 +1,4 @@
-﻿
-using CustomerManager.Model;
+﻿using CustomerManager.Model;
 
 namespace CustomerManager.DatabaseAccess.Repositories
 {

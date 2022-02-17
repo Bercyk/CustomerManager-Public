@@ -4,7 +4,6 @@ namespace CustomerManager.DatabaseAccess.Repositories
 {
     public interface ICustomerRepository
     {
-        // CUSTOMER CRUD
         Customer Get(int id);
 
         IList<Customer> GetAll();

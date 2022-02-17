@@ -1,5 +1,4 @@
-﻿
-using CustomerManager.Domain.DTOs;
+﻿using CustomerManager.Domain.DTOs;
 using CustomerManager.Model;
 
 namespace CustomerManager.Domain.Mappers

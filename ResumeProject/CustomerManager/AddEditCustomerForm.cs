@@ -1,9 +1,5 @@
-﻿using Autofac;
-using CustomerManager.DatabaseAccess.Repositories;
-using CustomerManager.Domain.DTOs;
+﻿using CustomerManager.Domain.DTOs;
 using CustomerManager.Domain.Services;
-using System;
-using System.ComponentModel;
 
 namespace CustomerManager
 {

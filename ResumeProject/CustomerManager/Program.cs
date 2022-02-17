@@ -4,7 +4,6 @@ using CustomerManager.DatabaseAccess.Repositories;
 using CustomerManager.Domain.Mappers;
 using CustomerManager.Domain.Services;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace CustomerManager
 {

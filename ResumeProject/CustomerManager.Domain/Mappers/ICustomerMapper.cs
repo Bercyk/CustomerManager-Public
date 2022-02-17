@@ -13,7 +13,5 @@ namespace CustomerManager.Domain.Mappers
 
         public CustomerTypeDTO MapCustomerType(CustomerType customerType);
 
-
-
     }
 }

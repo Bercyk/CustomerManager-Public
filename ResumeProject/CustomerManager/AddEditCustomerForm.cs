@@ -9,8 +9,6 @@ namespace CustomerManager
 {
     public partial class AddEditCustomerForm : Form
     {
-
-        //private readonly ICustomerTypeRepository _customerTypeRepository;
         private readonly ICustomerService _customerService;
 
         private bool _isEditClicked;
@@ -18,6 +16,8 @@ namespace CustomerManager
         private int? _customerId;
 
         private CustomerListForm _customerListForm;
+
+        private bool _isCorrectNIP = false;
         
 
         public AddEditCustomerForm(bool isEditClicked, int? customerId, ICustomerService customerService, CustomerListForm customerListForm)
@@ -57,35 +57,47 @@ namespace CustomerManager
         private void SaveButton_Click(object sender, EventArgs e)
         {
             GetDataFromForm();
-
-            this.Close();
-            _customerListForm.SetListView();
+            if (_isCorrectNIP)
+            {
+                this.Close();
+                _customerListForm.SetListView();
+            }
         }    
         
         private void GetDataFromForm()
         {
-            CustomerDTO customerDTO = new CustomerDTO();
-
-            customerDTO.Name = CustomerNameTextbox.Text;
-            customerDTO.NIP = NIPTextbox.Text;
-
-            var comboBoxItem = ((ComboboxItem)CustomerTypeCombobox.SelectedItem);
-
-            customerDTO.Type = new CustomerTypeDTO { Id = comboBoxItem.Value, Name = comboBoxItem.Text };
-
-            customerDTO.Description = CustomerDescriptionRichTextbox.Text;
-            customerDTO.Status = CustomerStatusCheckBox.Checked;
-
-            if (_isEditClicked)
+            if (NIPTextbox.Text.Length < 10)
             {
-                customerDTO.Id = (int)_customerId;
-                _customerService.Update(customerDTO);
+                MessageBox.Show("Wprowadź poprawny NIP (10 cyfr)!", "Błąd", MessageBoxButtons.OK);
+                _isCorrectNIP = false;
             }
             else
             {
-                _customerService.Create(customerDTO);
-            }
-            
+                _isCorrectNIP=true;
+
+                CustomerDTO customerDTO = new CustomerDTO();
+
+                customerDTO.Name = CustomerNameTextbox.Text;
+
+                customerDTO.NIP = NIPTextbox.Text;
+
+                var comboBoxItem = ((ComboboxItem)CustomerTypeCombobox.SelectedItem);
+
+                customerDTO.Type = new CustomerTypeDTO { Id = comboBoxItem.Value, Name = comboBoxItem.Text };
+
+                customerDTO.Description = CustomerDescriptionRichTextbox.Text;
+                customerDTO.Status = CustomerStatusCheckBox.Checked;
+
+                if (_isEditClicked)
+                {
+                    customerDTO.Id = (int)_customerId;
+                    _customerService.Update(customerDTO);
+                }
+                else
+                {
+                    _customerService.Create(customerDTO);
+                }
+            }   
         }
 
         private void SetCustomerType()

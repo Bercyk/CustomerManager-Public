@@ -11,8 +11,6 @@ namespace CustomerManager.DatabaseAccess
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //var connection = System.Configuration.ConfigurationManager.ConnectionStrings["customerConnString"].ConnectionString;
-
             optionsBuilder.UseSqlServer(@"Server=LAW172\SQL2019; Database=CustomerManager; Trusted_Connection=True");
         }
     }

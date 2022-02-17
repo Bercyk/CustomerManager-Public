@@ -1,5 +1,4 @@
 using CustomerManager.Domain.Services;
-using System.Linq;
 
 namespace CustomerManager
 { 

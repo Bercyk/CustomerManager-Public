@@ -1,7 +1,10 @@
 using Autofac;
+using CustomerManager.DatabaseAccess;
 using CustomerManager.DatabaseAccess.Repositories;
 using CustomerManager.Domain.Mappers;
 using CustomerManager.Domain.Services;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CustomerManager
 {
@@ -16,12 +19,18 @@ namespace CustomerManager
 
         [STAThread]
         static void Main()
-        {      
+        {
+            using (var context = new DbConfigContext())
+            {
+                context.Database.Migrate();
+            }
+
             ApplicationConfiguration.Initialize();
 
             container = Configure();
 
             CustomerListForm customerListForm = new CustomerListForm(container.Resolve<ICustomerService>());
+
             Application.Run(customerListForm);
 
         }
